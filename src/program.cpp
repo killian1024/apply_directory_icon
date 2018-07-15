@@ -36,10 +36,10 @@ namespace diricon {
 
 program::program(
         std::filesystem::path src_pth,
-        std::vector<std::string> icon_fles_nmes
+        std::vector<std::string> icon_nmes
 ) noexcept
         : src_pth_(std::move(src_pth))
-        , icon_fles_nmes_(std::move(icon_fles_nmes))
+        , icon_nmes_(std::move(icon_nmes))
 {
 }
 
@@ -57,7 +57,8 @@ bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) con
     
     cur_icon_pth = cur_dir_pth;
     cur_icon_pth /= ".";
-    for (auto& x : icon_fles_nmes_)
+    
+    for (auto& x : icon_nmes_)
     {
         cur_icon_pth.replace_filename(x);
         
@@ -105,8 +106,8 @@ bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) con
 
 
 bool program::apply_icon(
-        const std::filesystem::path& cur_dir,
-        const std::filesystem::path& cur_icon_pth
+        const std::filesystem::path& cur_dir_pth,
+        const std::filesystem::path& icon_pth
 ) const
 {
     GFile* file;
@@ -115,10 +116,10 @@ bool program::apply_icon(
     gpointer value;
     GError* error = nullptr;
     
-    file = g_file_new_for_commandline_arg(cur_dir.c_str());
+    file = g_file_new_for_commandline_arg(cur_dir_pth.c_str());
     attribute = "metadata::custom-icon";
     type = G_FILE_ATTRIBUTE_TYPE_STRING;
-    value = (void*)cur_icon_pth.filename().c_str();
+    value = (void*)icon_pth.filename().c_str();
     
     if (!g_file_set_attribute(file, attribute, type, value, G_FILE_QUERY_INFO_NONE, nullptr,
                               &error))

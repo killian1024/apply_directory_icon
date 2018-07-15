@@ -37,7 +37,7 @@ class program
 public:
     program(
             std::filesystem::path src_pth,
-            std::vector<std::string> icon_fles_nmes
+            std::vector<std::string> icon_nmes
     ) noexcept;
     
     int execute() const;
@@ -46,14 +46,14 @@ private:
     bool execute_in_directory(const std::filesystem::path& cur_dir_pth) const;
     
     bool apply_icon(
-            const std::filesystem::path& cur_dir,
-            const std::filesystem::path& cur_icon_pth
+            const std::filesystem::path& cur_dir_pth,
+            const std::filesystem::path& icon_pth
     ) const;
 
 private:
     std::filesystem::path src_pth_;
     
-    std::vector<std::string> icon_fles_nmes_;
+    std::vector<std::string> icon_nmes_;
 };
 
 

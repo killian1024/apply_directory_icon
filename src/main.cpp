@@ -24,7 +24,6 @@
 
 int main(int argc, char* argv[])
 {
-    // Set the argument parser.
     spdap::arg_parser ap("diricon");
     ap.add_help_text("Options:");
     ap.add_key_value_arg({"--icon-files", "-if"}, "Icon files names.", {spdap::avt_t::STRING}, 1u,
@@ -36,7 +35,6 @@ int main(int argc, char* argv[])
                        {spdap::avt_t::R_DIR | spdap::avt_t::W_DIR | spdap::avt_t::X_DIR});
     ap.parse_args((unsigned int)argc, argv);
     
-    // Execute the program.
     diricon::program prog(
             ap.get_front_arg_value_as<std::filesystem::path>("FILE"),
             ap.get_arg_values_as<std::string>("--icon-files",
