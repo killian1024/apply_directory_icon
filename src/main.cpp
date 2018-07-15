@@ -36,23 +36,11 @@ int main(int argc, char* argv[])
                        {spdap::avt_t::R_DIR | spdap::avt_t::W_DIR | spdap::avt_t::X_DIR});
     ap.parse_args((unsigned int)argc, argv);
     
-    // Set the icon files names.
-    std::unordered_set<std::string> icon_fles_nmes;
-    for (auto& x : ap.get_arg_values("--icon-files"))
-    {
-        icon_fles_nmes.insert(x.as<std::string>());
-    }
-    if (icon_fles_nmes.empty())
-    {
-        icon_fles_nmes.insert(".icon.jpg");
-        icon_fles_nmes.insert(".icon.jpeg");
-        icon_fles_nmes.insert(".icon.png");
-    }
-    
     // Execute the program.
     diricon::program prog(
             ap.get_front_arg_value_as<std::filesystem::path>("FILE"),
-            std::move(icon_fles_nmes)
+            ap.get_arg_values_as<std::string>("--icon-files",
+                                              {".icon.jpg", ".icon.jpeg", ".icon.png"})
     );
     
     return prog.execute();
