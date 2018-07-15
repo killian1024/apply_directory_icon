@@ -1,8 +1,8 @@
-### apply_directory_icons ###
+### diricon ###
 
-apply_directory_icons is a simple C++ program whose propose is apply pictures as directories icons 
-recursively editing the GNOME Virtual file system directories metatada. For more information use 
-`./apply_directory_icons --help` command.
+diricon is a simple C++ program whose propose is apply pictures as directories icons recursively 
+editing the GNOME Virtual file system directories metatada. For more information use 
+`./diricon --help` command.
 
 ### Build ###
 

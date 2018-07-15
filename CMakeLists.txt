@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project(apply_directory_icons)
+project(diricon)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -17,6 +17,6 @@ set(SOURCE_FILES
         src/program.hpp
         )
 
-add_executable(apply_directory_icons ${SOURCE_FILES})
-target_link_libraries(apply_directory_icons -lglib-2.0 -lgio-2.0 -lspeed -lstdc++fs)
-install(TARGETS apply_directory_icons DESTINATION bin)
+add_executable(diricon ${SOURCE_FILES})
+target_link_libraries(diricon -lglib-2.0 -lgio-2.0 -lspeed -lstdc++fs)
+install(TARGETS diricon DESTINATION bin)
