@@ -1,9 +1,9 @@
-/* apply_directory_icon
+/* apply_directory_icons
  * Copyright (C) 2018 Killian Poulaud.
  *
- * This file is part of apply_directory_icon.
+ * This file is part of apply_directory_icons.
  *
- * apply_directory_icon is free software: you can redistribute it and/or modify
+ * apply_directory_icons is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -25,7 +25,7 @@
 int main(int argc, char* argv[])
 {
     // Set the argument parser.
-    spdap::arg_parser ap("apply_directory_icon");
+    spdap::arg_parser ap("apply_directory_icons");
     ap.add_help_text("Options:");
     ap.add_key_value_arg({"--icon-files", "-if"}, "Icon files names.", {spdap::avt_t::STRING}, 1u,
                          ~0u);
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
     }
     
     // Execute the program.
-    apply_directory_icon::program prog(
+    apply_directory_icons::program prog(
             ap.get_front_arg_value_as<std::filesystem::path>("FILE"),
             std::move(icon_fles_nmes)
     );
