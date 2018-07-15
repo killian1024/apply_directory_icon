@@ -50,24 +50,24 @@ int program::execute() const
 }
 
 
-bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) const
+bool program::execute_in_directory(const std::filesystem::path& dir_pth) const
 {
-    std::filesystem::path cur_icon_pth;
+    std::filesystem::path icon_pth;
     bool sucss = true;
     
-    cur_icon_pth = cur_dir_pth;
-    cur_icon_pth /= ".";
+    icon_pth = dir_pth;
+    icon_pth /= ".";
     
     for (auto& x : icon_nmes_)
     {
-        cur_icon_pth.replace_filename(x);
+        icon_pth.replace_filename(x);
         
-        if (std::filesystem::is_regular_file(cur_icon_pth))
+        if (std::filesystem::is_regular_file(icon_pth))
         {
             std::cout << spdios::set_light_blue_text
-                      << "Applying icon " << cur_icon_pth.filename() << " in " << cur_dir_pth;
+                      << "Applying icon " << icon_pth.filename() << " in " << dir_pth;
     
-            if (!apply_icon(cur_dir_pth, cur_icon_pth))
+            if (!apply_icon(dir_pth, icon_pth))
             {
                 sucss = false;
                 std::cout << spdios::set_light_red_text << " [fail]" << spdios::newl;
@@ -81,7 +81,7 @@ bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) con
     
     try
     {
-        for (auto& x : std::filesystem::directory_iterator(cur_dir_pth))
+        for (auto& x : std::filesystem::directory_iterator(dir_pth))
         {
             if (std::filesystem::is_directory(x) || std::filesystem::is_symlink(x))
             {
@@ -95,7 +95,7 @@ bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) con
     catch (const std::filesystem::filesystem_error& fe)
     {
         std::cerr << spdios::set_light_red_text
-                  << "Error executing in directory: " << cur_dir_pth
+                  << "Error executing in directory: " << dir_pth
                   << spdios::newl;
     
         return false;
@@ -106,7 +106,7 @@ bool program::execute_in_directory(const std::filesystem::path& cur_dir_pth) con
 
 
 bool program::apply_icon(
-        const std::filesystem::path& cur_dir_pth,
+        const std::filesystem::path& dir_pth,
         const std::filesystem::path& icon_pth
 ) const
 {
@@ -116,7 +116,7 @@ bool program::apply_icon(
     gpointer value;
     GError* error = nullptr;
     
-    file = g_file_new_for_commandline_arg(cur_dir_pth.c_str());
+    file = g_file_new_for_commandline_arg(dir_pth.c_str());
     attribute = "metadata::custom-icon";
     type = G_FILE_ATTRIBUTE_TYPE_STRING;
     value = (void*)icon_pth.filename().c_str();

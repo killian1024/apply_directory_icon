@@ -43,10 +43,10 @@ public:
     int execute() const;
 
 private:
-    bool execute_in_directory(const std::filesystem::path& cur_dir_pth) const;
+    bool execute_in_directory(const std::filesystem::path& dir_pth) const;
     
     bool apply_icon(
-            const std::filesystem::path& cur_dir_pth,
+            const std::filesystem::path& dir_pth,
             const std::filesystem::path& icon_pth
     ) const;
 

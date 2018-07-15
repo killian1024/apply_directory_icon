@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     ap.add_key_value_arg({"--icon-files", "-if"}, "Icon files names.", {spdap::avt_t::STRING}, 1u,
                          ~0u);
     ap.add_help_arg({"--help"}, "Display this help and exit.");
-    ap.add_gplv3_version_arg({"--version"}, "Output version information and exit", "1.0.0", "2018",
+    ap.add_gplv3_version_arg({"--version"}, "Output version information and exit", "1.0", "2018",
                              "Killian Poulaud");
     ap.add_foreign_arg("FILE", "File", "",
                        {spdap::avt_t::R_DIR | spdap::avt_t::W_DIR | spdap::avt_t::X_DIR});
