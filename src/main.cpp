@@ -31,12 +31,12 @@ int main(int argc, char* argv[])
     ap.add_help_arg({"--help"}, "Display this help and exit.");
     ap.add_gplv3_version_arg({"--version"}, "Output version information and exit", "1.0.0", "2018",
                              "Killian Poulaud");
-    ap.add_foreign_arg("FILE", "File", "",
+    ap.add_foreign_arg("DIR", "Dir", "",
                        {spdap::avt_t::R_DIR | spdap::avt_t::W_DIR | spdap::avt_t::X_DIR});
     ap.parse_args((unsigned int)argc, argv);
     
     diricon::program prog(
-            ap.get_front_arg_value_as<std::filesystem::path>("FILE"),
+            ap.get_front_arg_value_as<std::filesystem::path>("DIR"),
             ap.get_arg_values_as<std::string>("--icon-files",
                                               {".icon.jpg", ".icon.jpeg", ".icon.png"})
     );
