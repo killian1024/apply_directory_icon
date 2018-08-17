@@ -25,8 +25,8 @@
 #define APPLY_DIRECTORY_ICON_PROGRAM_HPP
 
 #include <filesystem>
+#include <set>
 #include <string>
-#include <unordered_set>
 
 
 namespace diricon {
@@ -40,10 +40,14 @@ public:
             std::vector<std::string> icon_nmes
     ) noexcept;
     
-    int execute() const;
+    int execute();
 
 private:
-    bool execute_in_directory(const std::filesystem::path& dir_pth) const;
+    bool execute_in_directory(const std::filesystem::path& dir_pth);
+    
+    void visit_inode(const std::filesystem::path& dir_pth);
+    
+    bool is_inode_visited(const std::filesystem::path& dir_pth) const noexcept;
     
     bool apply_icon(
             const std::filesystem::path& dir_pth,
@@ -54,6 +58,8 @@ private:
     std::filesystem::path src_pth_;
     
     std::vector<std::string> icon_nmes_;
+    
+    std::set<std::uint64_t> vistd_inos_;
 };
 
 
