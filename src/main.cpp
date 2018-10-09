@@ -18,20 +18,21 @@
  */
 
 #include <speed/speed.hpp>
+#include <speed/speed_alias.hpp>
 
 #include "program.hpp"
 
 
 int main(int argc, char* argv[])
 {
-    spdap::arg_parser ap("diricon");
+    spd::ap::arg_parser ap("diricon");
     ap.add_help_text("Options:");
-    ap.add_key_value_arg({"--icon-files", "-if"}, "Icon files names.", {spdap::avt_t::STRING}, 1u,
+    ap.add_key_value_arg({"--icon-files", "-if"}, "Icon files names.", {spd::ap::avt_t::STRING}, 1u,
                          ~0u);
     ap.add_help_arg({"--help"}, "Display this help and exit.");
     ap.add_gplv3_version_arg({"--version"}, "Output version information and exit", "1.0.0", "2018",
                              "Killian Poulaud");
-    ap.add_keyless_arg("DIR", "Dir", "", {spdap::avt_t::RWX_DIR});
+    ap.add_keyless_arg("DIR", "Dir", "", {spd::ap::avt_t::RWX_DIR});
     ap.parse_args((unsigned int)argc, argv);
     
     diricon::program prog(
